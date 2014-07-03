@@ -1,8 +1,14 @@
 package cn.burton.math;
+
+import java.util.Arrays;
+
 /**
  * 插入排序
  * @author Administrator
- *
+ * 插入排序就如同抓牌时，每次抓一张，然后插入到合适的地方。
+ * 时间复杂 n*n
+ * 1、从第二项开始，往左检查，寻找插入点。
+ * 
  */
 public class InsertSort {
 
@@ -11,9 +17,7 @@ public class InsertSort {
 
 		double[] nums= new double[]{9,5,10,2,6,7};
 		InsertSort.insertForm(nums);
-		for(int i=0;i<nums.length;i++){
-			System.out.println(nums[i]);
-		}
+		System.out.println(Arrays.toString(nums));
 	}
      // demo sort asc
 	public static void insertForm(double[] sorted){
