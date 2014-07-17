@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
+import java.nio.charset.Charset;
 
 import org.junit.Test;
 /**
@@ -18,12 +19,37 @@ import org.junit.Test;
  * @author Administrator
  *
  * 关于缓冲的子缓存
+ * io inputStream OutputStream 是基于流的实现以字节为单位处理数据，并且非常容易建立各种过滤器
+ * 1、为所有的原始类型提供（buffer）缓冲支持
+ * 2、使用 java.nio.charset.Charset 作为字节集编码解码解决方案
+ * 3、增加通道（channel）对象，作为新的原始I/O 抽象
+ * 4、支持锁和内存映射文件的文件访问接口
+ * 5、提供了基于Selector 的异步网络I/O
+ *    关于http://blog.csdn.net/tsyj810883979/article/details/6876599
+ *    
+ * 
+ * NIO 是基于块（block）,它以块为单位处理单位，在NIO 中最重要的两个组件，channel和buffer,buffer是一个连续内存块
+ * ，是nio 数据的中转站，通道是访问缓冲的接口，表示缓冲数据的源头或者目的地，它用于向缓冲或者写入数据
+ * 
+ * channel 双向通道，stream 是单向
+ * 
+ * nio 的工作原理
+ * http://weixiaolu.iteye.com/blog/1479656
+ * 
+ * 阻塞io????
+ * 
+ * 
+ * 
  */
 public class StartNIO {
 
 	
+	
+	
 	@Test
 	public void start(){
+		
+//		Charset
 		FileChannel channel =null;
 		try {
 			FileInputStream file = new FileInputStream("D:"+File.separator+"stack.log");
@@ -197,6 +223,8 @@ public class StartNIO {
 	}
 	/**
 	 * 关于buffer 内存映射
+	 * 直接读取，并显示
+	 * 
 	 */
 	@Test
 	public void aboutMapped(){
@@ -205,10 +233,18 @@ public class StartNIO {
 			RandomAccessFile file = new RandomAccessFile("D:"+File.separator+"stack.log","rw");
             FileChannel channel=  file.getChannel();
             System.out.println(file.length());
-            MappedByteBuffer mapped =channel.map(MapMode.READ_WRITE, 0, file.length());
-            while(mapped.hasRemaining()){
-            	System.out.println(mapped.get());
-            }
+            MappedByteBuffer mapped =channel.map(MapMode.READ_WRITE, 0, 1024);
+//            while(mapped.hasRemaining()){
+//            	System.out.println(mapped.get());
+//            }
+//            while(true){
+//            	mapped.clear();
+//            	int tmp =channel.read(mapped);
+//            	if(tmp ==-1){
+//            		break;
+//            	}
+//            	System.out.println(new String(mapped.array(),"utf-8"));
+//            }
             channel.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
