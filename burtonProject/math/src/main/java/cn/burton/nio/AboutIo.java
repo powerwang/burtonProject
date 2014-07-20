@@ -1,7 +1,6 @@
 package cn.burton.nio;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +12,8 @@ import org.junit.Test;
 
 /**
  * 关于io 的操作
+ * 
+ * 
  * @author Administrator
  *
  */
@@ -41,4 +42,7 @@ public class AboutIo {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 }
