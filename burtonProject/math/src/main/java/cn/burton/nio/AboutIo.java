@@ -13,6 +13,8 @@ import org.junit.Test;
 /**
  * 关于io 的操作
  * 
+ * inputStream outputStream 
+ * writer  read
  * 
  * @author Administrator
  *
